@@ -10,7 +10,6 @@ from pathlib import Path
 
 import boto3
 
-
 # Initialising the logger
 LOGGER = logging.getLogger(__name__)
 

@@ -27,7 +27,7 @@ def read_json(json_path):
     return json_data
 
 
-def check_file_extn(filepath, desired_extn):
+def validate_file_extn(filepath, desired_extn):
     """
     Checks the file extension. If incorrect extension (type) is detected, then raises the TypeError exception.
 
