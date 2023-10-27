@@ -9,6 +9,12 @@ Repository of general purpose utility functions in Python
 - [ ] create documentation for this repo
 - [x] create a directory named `aws` containing the AWS related utils codebase
 - [ ] add Python file for accessing RDS tables, creating Secrets in Secrets Manager
+- [ ] multithreading s3 operations upload and download functions
 - [ ] add another function for read and validate datatypes
 - [ ] add function for `timeit` decorator
 - [ ] `poetry` dependency manager for the repo
+
+
+## Miscellaneous 
+- [ ] Milvus experiments as a new repo.
+  - [ ] generate sample data for `/data` directory 
