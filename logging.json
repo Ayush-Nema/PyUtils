@@ -1,3 +1,49 @@
 {
-
+  "version": 1,
+  "disable_existing_loggers": true,
+  "formatters": {
+    "package_formatter": {
+      "format": "[%(asctime)s] - [%(levelname)s] - [%(pathname)s:%(lineno)d] : [%(name)s.%(funcName)s]: %(message)s",
+      "datefmt": "%m/%d/%Y %I:%M:%S %p"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "package_formatter"
+    },
+    "stream": {
+      "class": "logging.FileHandler",
+      "level": "DEBUG",
+      "formatter": "package_formatter",
+      "filename": "logs/logs.log"
+    }
+  },
+  "loggers": {
+    "utils.s3": {
+      "level": "DEBUG",
+      "propagate": false,
+      "handlers": [
+        "console",
+        "stream"
+      ]
+    },
+    "src.file": {
+      "level": "INFO",
+      "propagate": false,
+      "handlers": [
+        "console",
+        "stream"
+      ]
+    }
+  },
+  "root": {
+    "level": "INFO",
+    "propagate": false,
+    "handlers": [
+      "console",
+      "stream"
+    ]
+  }
 }
