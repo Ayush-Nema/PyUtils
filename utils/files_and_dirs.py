@@ -88,6 +88,64 @@ def dir_teardown(dir_name):
             LOGGER.error(f'Failed to delete {file_path}. Reason: {e}.')
 
 
+class purge_data:
+    def __init__(self, direc_path: str):
+        self.direc_path = direc_path + "/*"
+        self.base_str = "Do you wish to continue? \n" \
+                        "Press 'Y' for Yes, else press any key to terminate."
+
+    def purge_directory(self):
+        all_content = glob(self.direc_path)
+        print(f"All {len(all_content)} files will be deleted.")
+
+        act = input(f"You are going to empty complete data directory. \n"
+                    f"This will delete everything and this action is irreversible. \n{self.base_str}")
+
+        if act == 'Y':
+            print("Commencing purge operation...")
+            self._delete_core(all_content)
+            print("All files deleted!")
+        else:
+            print("Skipping data deletion.")
+
+    def delete_specific(self, f_extn: str):
+        # f_extn can be either `.wav` or `.json` (with a leading period (.))
+        accepted_extns = ['.wav', '.json']
+        if f_extn not in accepted_extns:
+            raise TypeError(f"Accepted file extensions are {accepted_extns}. Provided: {f_extn}.")
+
+        all_files_of_this_kind = glob(self.direc_path + f_extn)
+        print(f"Total {len(all_files_of_this_kind)} found with [{f_extn}] extension and will be deleted!")
+
+        act = input(f"You are about the delete all [{f_extn}] files from Label Studio media directory. \n"
+                    f"This action is irreversible. \n{self.base_str}")
+
+        if act == 'Y':
+            self._delete_core(all_files_of_this_kind)
+            print(f"All {f_extn} files erased for media directory")
+        else:
+            print("Skipped data deletion.")
+
+    @staticmethod
+    def _delete_core(f_list: list):
+        """
+        Central module for data deletion. Actual file removal operation takes place here.
+
+        :param f_list: list of all files to be removed
+        :type f_list: list
+        """
+        for f in f_list:
+            os.remove(f)
+
+    def deletion_validation(self):
+        # Stores the value of initial and final states of media directory.
+        # Reports the number of files found for deletion and deleted after operation.
+        # Perform base calculation: final count = (initial count - eligible files for deletion). Tallies both sides.
+        # Send success or fail message to caller function
+        pass
+
+
+
 def validate_dir(dir_name: str):
     """
     Validate and cross-verify that intermediate export directories are present, if not create them.
