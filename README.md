@@ -10,7 +10,7 @@ Curation of general purpose tools so that you don't have to write the basic stuf
 - [ ] sample code for `sphinx` setup
 - [ ] create documentation for this repo
 - [x] create a directory named `aws` containing the AWS related utils codebase
-- [ ] add Python file for accessing RDS tables, creating Secrets in Secrets Manager
+- [ ] add Python file for accessing RDS tables, creating and updating Secrets in Secrets Manager
   - [ ] for RDS:
     - [ ] add functions for adding, deleting, and altering columns
     - [ ] add functions for creating and altering tables
