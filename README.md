@@ -14,6 +14,7 @@ Curation of general purpose tools so that you don't have to write the basic stuf
   - [ ] for RDS:
     - [ ] add functions for adding, deleting, and altering columns
     - [ ] add functions for creating and altering tables
+    - [ ] funcs for checking column names and respective datatypes
 - [ ] multithreading s3 operations upload and download functions
 - [ ] add another function for read and validate datatypes
 - [x] add function for `timeit` decorator
