@@ -5,8 +5,8 @@ Curation of general purpose tools so that you don't have to write the basic stuf
 
 ## ToDo
 - [x] create empty logging.json file
-- [ ] add sample logging.json (with and without stream handler)
-- [ ] add module for setting up (and showing the usage of) the argument parser
+- [x] add sample logging.json (with and without stream handler)
+- [x] add module for setting up (and showing the usage of) the argument parser
 - [ ] sample code for `sphinx` setup
 - [ ] create documentation for this repo
 - [x] create a directory named `aws` containing the AWS related utils codebase
@@ -19,8 +19,15 @@ Curation of general purpose tools so that you don't have to write the basic stuf
 - [ ] add another function for read and validate datatypes
 - [x] add function for `timeit` decorator
 - [ ] `poetry` dependency manager for the repo
+- [ ] add functionalities for automatic retries using `retry`
+- [ ] functions for raising `timeoutError`
 
 
 ## Miscellaneous 
 - [ ] Milvus experiments as a new repo.
-  - [ ] generate sample data for `/data` directory 
+  - [ ] generate sample data for `/data` directory
+- [ ] Repositories for:
+  - [ ] Audio clipper (with file merger logic + denoiser*)
+  - [ ] ASR comparisions (includes live transcription with multilingual support)
+  - [ ] LLM notes
+  - [ ] Memory profiling and identification of memory leaks
