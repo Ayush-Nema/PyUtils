@@ -58,6 +58,10 @@ def set_env_vars(env_fp: str):
 
     e_vars = dict(dotenv_values(env_fp))
     LOGGER.debug(f"Environment variables set are: \n {list(e_vars.keys())}")
+
+    # Better way
+    # _ = load_dotenv(find_dotenv())  # OR load_dotenv(env_fp)
+    # Output ex for usage: openai.api_key = os.environ['OPENAI_API_KEY']
     return e_vars
 
 
