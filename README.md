@@ -28,6 +28,6 @@ Curation of general purpose tools so that you don't have to write the basic stuf
   - [ ] generate sample data for `/data` directory
 - [ ] Repositories for:
   - [ ] Audio clipper (with file merger logic + denoiser*)
-  - [ ] ASR comparisions (includes live transcription with multilingual support)
-  - [ ] LLM notes
+  - [ ] ASR comparisons (includes live transcription with multilingual support)
+  - [x] LLM notes
   - [ ] Memory profiling and identification of memory leaks
