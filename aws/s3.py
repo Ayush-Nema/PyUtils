@@ -241,3 +241,20 @@ def list_s3_files(s3_client, bucket_name, content_dir_name, list_only_extn=".jso
         all_files = [i for i in all_files if i.endswith(list_only_extn)]
 
     return all_files
+
+
+def read_s3_object(s3_client, bucket_name, file_name):
+    """
+    Read an object without downloading it. (tested with JSON)
+
+    :param s3_client: boto3 client pointer
+    :type s3_client: <class botocore.client.S3>
+    :param bucket_name: Name of bucket where the file is stored
+    :type bucket_name: str
+    :param file_name: name of the file to read. Can also contain the name of dir e.g. "dir/subdir/foo.json"
+    :type file_name: str
+    :return: pointer to read object
+    """
+    response = s3_client.get_object(Bucket=bucket_name, Key=file_name)
+    content = response['Body'].read().decode('utf-8')
+    return json.loads(content)
