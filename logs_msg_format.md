@@ -29,3 +29,7 @@ There are different ways for formatting the log message, the following ones are 
       "datefmt": "%m/%d/%Y %I:%M:%S %p"
     }
 ```
+
+
+## Helpful links
+1. More details to format the file with different handlers: [Click here](https://gist.github.com/kingspp/9451566a5555fb022215ca2b7b802f19)
