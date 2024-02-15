@@ -24,17 +24,26 @@ def run_time(func):
     Computes the run-time of the calling function.
 
     :param func: function
-    :return: Nothing
+    :return: None
     """
+
+    # @wraps(func)
+    # def wrapper_timer(*args, **kwargs):
+    #     start_time = time.perf_counter()
+    #     value = func(*args, **kwargs)
+    #     end_time = time.perf_counter()
+    #     time_elapsed = end_time - start_time
+    #     LOGGER.info(f"Finished {func.__name__!r}{args} {kwargs} in {time_elapsed:.4f} secs")
+    #     return value
 
     @wraps(func)
     def wrapper_timer(*args, **kwargs):
-        start_time = time.perf_counter()
-        value = func(*args, **kwargs)
-        end_time = time.perf_counter()
-        time_elapsed = end_time - start_time
-        LOGGER.info(f"Finished {func.__name__!r}{args} {kwargs} in {time_elapsed:.4f} secs")
-        return value
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        LOGGER.debug(f"Execution time of '{func.__name__}': {execution_time*1e3:.5f} ms")
+        return result
 
     return wrapper_timer
 
