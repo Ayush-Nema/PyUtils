@@ -209,3 +209,18 @@ class CompareTwoJSONs:
 
         for line in difflib.unified_diff(lines1, lines2, fromfile='file1', tofile='file2', lineterm=''):
             print(line)
+
+
+def generate_hash(**kwargs):
+    """
+    Generate hash based on any number of keyword args using MD5 (Message Digest Method 5) algorithm.
+
+    :param kwargs: keyword args upon which the hashing function will act
+    :return: generated hash for `kwargs`
+    :rtype: str
+    """
+
+    composed_str = json.dumps(kwargs).encode('utf-8')
+    _gen_hash = hashlib.md5(composed_str).hexdigest()
+
+    return _gen_hash
