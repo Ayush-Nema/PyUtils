@@ -8,6 +8,7 @@ import filecmp
 import hashlib
 import logging
 import time
+from datetime import datetime
 import difflib
 from functools import wraps
 
@@ -82,6 +83,21 @@ def check_nans_in_df(df, col_name=None):
         return df[col_name].isnull().values.any(), df[col_name].isnull().sum()
     else:
         return df.isnull().values.any(), df.isnull().sum()
+
+
+def get_current_time():
+    """
+    Producee timestamp which is JSON compatible (serializable)
+
+    :return: JSON compatible timestamp
+    :rtype: str
+    """
+    current_timestamp = datetime.now()
+
+    # Convert datetime to ISO 8601 formatted string
+    iso_formatted_datetime = current_timestamp.isoformat()
+
+    return iso_formatted_datetime
 
 
 def merge_dicts(dict1, dict2):
