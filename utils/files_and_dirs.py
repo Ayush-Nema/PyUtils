@@ -11,6 +11,7 @@ import shutil
 import subprocess
 from glob import glob
 from pathlib import Path
+import pandas as pd
 
 # Initialising the logger
 LOGGER = logging.getLogger(__name__)
@@ -184,3 +185,38 @@ def validate_file_extn(filepath, desired_extn):
     """
     if not filepath.endswith(desired_extn):
         raise TypeError(f"File type should be [{desired_extn}] got [.{filepath.split('.')[-1]}] instead.")
+
+
+def export_to_csv(func):
+    """
+    A wrapper for exporting the dataframe as CSV file, given the export path and file name.
+
+    Usage:  
+    @export_to_csv
+    def create_dataframe():
+        data = {'Name': ['John', 'Anna', 'Peter', 'Linda'],
+                'Age': [25, 30, 35, 40],
+                'City': ['New York', 'Paris', 'London', 'Tokyo']}
+        df = pd.DataFrame(data)
+        
+        # Add export path and filename to the DataFrame metadata
+        df._metadata = {'export_path': 'exports', 'export_filename': 'output.csv'}
+        
+        return df
+    """
+    
+    def wrapper(*args, **kwargs):
+        # Call the original function to get the DataFrame
+        df = func(*args, **kwargs)
+        # Get the export path and filename from the function
+        export_path = df._metadata.get('export_path', None)
+        export_filename = df._metadata.get('export_filename', None)
+        if export_path and export_filename:
+            file_path = f"{export_path}/{export_filename}"
+            df.to_csv(file_path, index=False)
+            print(f"DataFrame exported to {file_path}")
+        
+        else:
+            print("Export path or filename is missing in the DataFrame metadata.")
+        return df
+    return wrapper
