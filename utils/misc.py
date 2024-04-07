@@ -112,10 +112,15 @@ def merge_dicts(dict1, dict2):
     :rtype: dict
     :raise: raises `ValueError` is one or more keys are present in the input dictionaries.
     """
-
+    
     common_keys = set(dict1.keys()) & set(dict2.keys())
     if common_keys:
         raise ValueError(f"Both dictionaries have overlapping keys: {common_keys}")
+
+    # An alternative route:
+    # Use `dict1 | dict2`. However, their is a risk. If the keys are duplicated in the dicts they gets overridden by more recent value. 
+    # Might cause diasaster in some cases. Use with caution.
+    
     return {**dict1, **dict2}
 
 
