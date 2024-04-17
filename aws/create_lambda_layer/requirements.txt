@@ -1,0 +1,7 @@
+sqlalchemy==2.0.25
+pandas
+psycopg2-binary
+pydantic==2.5.3
+urllib3==1.26.16
+openai==1.10.0
+tenacity>=1.0.0
