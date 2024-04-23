@@ -38,7 +38,7 @@ def connect_s3(aws_access_key_id=None, aws_secret_access_key=None, aws_session_t
                                  aws_session_token=aws_session_token)
 
     else:
-        LOGGER.debug("AWS access credentials not passed explicitly, continuing based on IAM role policy.")
+        LOGGER.debug("AWS access credentials not passed explicitly, accessing based on IAM role privilages.")
         s3_client = boto3.client('s3')
 
     return s3_client
