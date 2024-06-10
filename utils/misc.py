@@ -68,6 +68,22 @@ def count_call(func):
     return wrapper
 
 
+def debug(func):
+    """
+    A decorator that logs the arguments and keyword arguments passed to the decorated function,
+    facilitating easier debugging by providing insights into function calls.
+
+    :param func: function
+    :return: None
+    """
+    def wrapper(*args, **kwargs):
+        arg_values = ', '.join([str(a) for a in args])  # Convert args to string
+        kwarg_values = ', '.join([f"{k}={v}" for k, v in kwargs.items()])  # Convert kwargs to string
+        print(f"Called {func.__name__} with args: [{arg_values}] and kwargs: [{kwarg_values}]")
+        return func(*args, **kwargs)
+    return wrapper
+
+
 def check_nans_in_df(df, col_name=None):
     """
     Checks for NaNs in pandas dataframe object.
