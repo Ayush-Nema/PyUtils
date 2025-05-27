@@ -68,6 +68,19 @@ def count_call(func):
     return wrapper
 
 
+def statement_execution_counter():
+    """
+    Finding the number of times some statement has been executed during the runtime.  
+    - Place the following lines of code within function that you want to check execution for and let it print the count!
+    """
+    
+    from functools import lru_cache
+    execution_count = {'count': 0}  # place this at the top of the file
+
+    execution_count['count'] += 1
+    LOGGER.debug(f"Executed this line: {execution_count['count']} times")
+
+
 def debug(func):
     """
     A decorator that logs the arguments and keyword arguments passed to the decorated function,
