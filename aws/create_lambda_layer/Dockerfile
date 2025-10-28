@@ -1,5 +1,5 @@
 # Use the official Python runtime as the base image
-FROM python:3.8-slim-buster
+FROM python:3.13.5-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -13,9 +13,10 @@ RUN apt-get update && \
 COPY requirements.txt .
 
 # Install the Python packages listed in requirements.txt
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt -t /opt/python/
 
 # Set the CMD to zip the installed packages into a layer
 # change the `requests-layer` to the LAYER_NAME variable as per create_layer.sh file
 
-CMD cd /opt && zip -r9 /app/sqlalchemy-layer.zip .
+CMD cd /opt && zip -r9 /app/ops-chatbot-layer.zip .
