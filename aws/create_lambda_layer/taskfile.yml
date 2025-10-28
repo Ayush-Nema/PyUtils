@@ -1,0 +1,54 @@
+version: "3"
+
+silent: false
+
+env:
+  S3_BUCKET_NAME: ops-chatbot-lambda-layer
+  S3_DIR: lambda_layer
+  ZIP_NAME: ops-chatbot-playwright-layer.zip
+  ZIP_DIR: layers
+
+tasks:
+  create-layer-zip:
+    aliases: [ create-zip ]
+    cmds:
+      - ./create_layer.sh
+    summary: "Triggers the shell file to create the Lambda layer"
+
+  check-layer-size:
+    aliases: [ check-size ]
+    cmds:
+      - |
+        TMP_DIR=$(mktemp -d)
+        unzip -q "{{.ZIP_DIR}}/{{.ZIP_NAME}}" -d "$TMP_DIR"
+        SIZE=$(du -sh "$TMP_DIR" | cut -f1)
+        echo "Unzipped layer size: $SIZE"
+        rm -rf "$TMP_DIR"
+
+        ZIP_SIZE=$(du -sh "{{.ZIP_DIR}}/{{.ZIP_NAME}}" | cut -f1)
+        echo "Zip layer size: $ZIP_SIZE"
+
+        if [[ "$SIZE" > "250MB" ]]; then
+          echo "⚠️Error: Layer size exceeds 250MB limit. Size: $SIZE"
+          exit 1
+        else
+          echo "Layer size is within the limit. Size: $SIZE"
+        fi
+    summary: "Checks the size of the Lambda layer zip file"
+
+  push-layer:
+    deps: [ check-layer-size ]
+    cmds:
+      - |
+        if [ ! -f "{{.ZIP_DIR}}/{{.ZIP_NAME}}" ]; then
+          echo "Error: {{.ZIP_NAME}} not found in the {{.ZIP_DIR}} directory."
+          exit 1
+        fi
+
+        echo "Uploading {{.ZIP_NAME}} to S3..."
+        aws s3 cp \
+          "{{.ZIP_DIR}}/{{.ZIP_NAME}}" \
+          "s3://{{.S3_BUCKET_NAME}}/{{.S3_DIR}}/{{.ZIP_NAME}}"
+
+        echo "Successfully uploaded {{.ZIP_NAME}} to S3"
+    summary: "Pushes the Lambda layer to S3"
